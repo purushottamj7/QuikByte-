@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cart | QuikByte</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <header class="navbar">
+
+        <div class="logo">
+            Campus<span>Canteen</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+
+            <a href="cart.html" class="active">
+                Cart 🛒
+                <span id="cart-count">0</span>
+            </a>
+
+            <a href="login.html">Login</a>
+        </nav>
+
+    </header>
+
+
+    <section class="cart-header">
+
+        <p class="small-heading">
+            YOUR ORDER
+        </p>
+
+        <h1>
+            Your Cart 🛒
+        </h1>
+
+        <p>
+            Review your items before placing your order.
+        </p>
+
+    </section>
+
+
+
+    <main class="cart-container">
+
+
+        <section class="cart-items-section">
+
+            <div id="cart-items">
+
+
+            </div>
+
+
+
+            <div id="empty-cart" class="empty-cart">
+
+                <div class="empty-cart-icon">
+                    🛒
+                </div>
+
+                <h2>
+                    Your cart is empty
+                </h2>
+
+                <p>
+                    Looks like you haven't added anything yet.
+                </p>
+
+                <a href="menu.html" class="primary-btn">
+                    Browse Menu →
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <aside class="order-summary">
+
+            <h2>
+                Order Summary
+            </h2>
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span id="subtotal">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    GST
+                </span>
+
+                <span id="gst">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="summary-line"></div>
+
+
+            <div class="summary-row total-row">
+
+                <span>
+                    Total
+                </span>
+
+                <span id="total">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <button
+                id="place-order-btn"
+                class="place-order-btn"
+                onclick="placeOrder()"
+            >
+                Place Order
+            </button>
+
+
+            <a href="menu.html" class="continue-shopping">
+                ← Continue Shopping
+            </a>
+
+        </aside>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 QuikByte | College Mini Project
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
