@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFlow Menu</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🍔 CampusFlow</h1>
+
+    <h2>🍽️ Canteen Menu</h2>
+
+    <p>Select your favourite food.</p>
+
+
+    {% for menu_item in menu_items %}
+
+    <div class="menu-item">
+
+        {% if menu_item["item"] == "Pizza" %}
+            <div class="food-icon">🍕</div>
+
+        {% elif menu_item["item"] == "Burger" %}
+            <div class="food-icon">🍔</div>
+
+        {% elif menu_item["item"] == "Sandwich" %}
+            <div class="food-icon">🥪</div>
+
+        {% elif menu_item["item"] == "Cold Drink" %}
+            <div class="food-icon">🥤</div>
+
+        {% elif menu_item["item"] == "Tea" %}
+            <div class="food-icon">☕</div>
+        {% endif %}
+
+
+        <h3>{{ menu_item["item"] }}</h3>
+
+        <p class="price">
+            ₹{{ menu_item["price"] }}
+        </p>
+
+
+        {% if menu_item["available"] == 1 %}
+
+            {% if menu_item["item"] in cart %}
+
+                <div class="quantity-box">
+
+                    <a href="{{ url_for('decrease', item=menu_item['item']) }}">
+                        <button class="quantity-button">➖</button>
+                    </a>
+
+                    <span class="quantity">
+                        {{ cart[menu_item["item"]] }}
+                    </span>
+
+                    <a href="{{ url_for('add_to_cart', item=menu_item['item']) }}">
+                        <button class="quantity-button">➕</button>
+                    </a>
+
+                </div>
+
+                <p class="added-text">
+                    ✅ {{ cart[menu_item["item"]] }} added to cart
+                </p>
+
+            {% else %}
+
+                <a href="{{ url_for('add_to_cart', item=menu_item['item']) }}">
+                    <button>➕ Add to Cart</button>
+                </a>
+
+            {% endif %}
+
+        {% else %}
+
+            <p style="color: red; font-weight: bold;">
+                ❌ Currently Not Available
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+
+    <br>
+
+    <a href="{{ url_for('cart') }}">
+    <button class="cart-button">
+        🛒 Cart ({{ cart_count }})
+    </button>
+</a>
+
+</div>
+
+</body>
+</html>

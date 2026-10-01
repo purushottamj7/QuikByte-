@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Track Order - CampusFlow</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container track-page">
+
+    <h1>📦 Track Order</h1>
+
+    <p>
+        Follow your order from kitchen to pickup.
+    </p>
+
+
+    <!-- ORDER CARD -->
+
+    <div class="track-card">
+
+        <!-- ORDER HEADER -->
+
+        <div class="track-header">
+
+            <div>
+
+                <span>Order ID</span>
+
+                <h2>
+                    #{{ order["id"] }}
+                </h2>
+
+            </div>
+
+
+            <div>
+
+                <span>Consumer ID</span>
+
+                <h2 class="consumer-id">
+                    {{ order["consumer_id"] }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- CUSTOMER -->
+
+        <div class="track-customer">
+
+            <h3>👤 Customer</h3>
+
+            <p>
+                {{ order["customer_name"] }}
+            </p>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <h3>📊 Order Progress</h3>
+
+        <div class="order-progress">
+
+            <!-- PLACED -->
+
+            <div class="progress-step
+                {% if order['status'] in ['Placed', 'Preparing', 'Ready', 'Collected'] %}
+                    active
+                {% endif %}">
+
+                <div class="progress-circle">
+                    🟡
+                </div>
+
+                <p>Placed</p>
+
+            </div>
+
+
+            <div class="progress-line
+                {% if order['status'] in ['Preparing', 'Ready', 'Collected'] %}
+                    active-line
+                {% endif %}">
+            </div>
+
+
+            <!-- PREPARING -->
+
+            <div class="progress-step
+                {% if order['status'] in ['Preparing', 'Ready', 'Collected'] %}
+                    active
+                {% endif %}">
+
+                <div class="progress-circle">
+                    🔵
+                </div>
+
+                <p>Preparing</p>
+
+            </div>
+
+
+            <div class="progress-line
+                {% if order['status'] in ['Ready', 'Collected'] %}
+                    active-line
+                {% endif %}">
+            </div>
+
+
+            <!-- READY -->
+
+            <div class="progress-step
+                {% if order['status'] in ['Ready', 'Collected'] %}
+                    active
+                {% endif %}">
+
+                <div class="progress-circle">
+                    🟢
+                </div>
+
+                <p>Ready</p>
+
+            </div>
+
+
+            <div class="progress-line
+                {% if order['status'] == 'Collected' %}
+                    active-line
+                {% endif %}">
+            </div>
+
+
+            <!-- COLLECTED -->
+
+            <div class="progress-step
+                {% if order['status'] == 'Collected' %}
+                    active
+                {% endif %}">
+
+                <div class="progress-circle">
+                    ✅
+                </div>
+
+                <p>Collected</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CURRENT STATUS -->
+
+        <div class="current-status">
+
+            <h3>📦 Current Status</h3>
+
+            {% if order["status"] == "Placed" %}
+
+                <p class="status-placed">
+                    🟡 Order Placed
+                </p>
+
+            {% elif order["status"] == "Preparing" %}
+
+                <p class="status-preparing">
+                    🔵 Preparing Your Order
+                </p>
+
+            {% elif order["status"] == "Ready" %}
+
+                <p class="status-ready">
+                    🟢 Ready for Pickup
+                </p>
+
+            {% elif order["status"] == "Collected" %}
+
+                <p class="status-collected">
+                    ✅ Order Collected
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- WAIT TIME -->
+
+        <div class="wait-time">
+
+            <h3>⏱️ Estimated Wait Time</h3>
+
+            {% if order["status"] == "Placed" %}
+
+                <p>
+                    Approximately
+                    <strong>{{ wait_time }} minutes</strong>
+                </p>
+
+            {% elif order["status"] == "Preparing" %}
+
+                <p>
+                    Approximately
+                    <strong>{{ wait_time }} minutes</strong>
+                </p>
+
+            {% elif order["status"] == "Ready" %}
+
+                <p>
+                    🎉 Your order is ready for pickup!
+                </p>
+
+            {% elif order["status"] == "Collected" %}
+
+                <p>
+                    ✅ Order completed successfully.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- ITEMS -->
+
+        <h3>🍽️ Your Order</h3>
+
+        <div class="track-items">
+
+            {% for item in items %}
+
+            <div class="track-item">
+
+                <span>
+                    {{ item["item"] }}
+                    × {{ item["quantity"] }}
+                </span>
+
+                <strong>
+                    ₹{{ item["price"] * item["quantity"] }}
+                </strong>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="track-total">
+
+            <span>
+                Total
+            </span>
+
+            <strong>
+                ₹{{ order["total_price"] }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="track-buttons">
+
+        <a href="{{ url_for('menu') }}">
+
+            <button>
+                🍔 Back to Menu
+            </button>
+
+        </a>
+
+
+        <a href="{{ url_for('home') }}">
+
+            <button>
+                🏠 Home
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

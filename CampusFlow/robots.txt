@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://campusflow-uorp.onrender.com/sitemap.xml

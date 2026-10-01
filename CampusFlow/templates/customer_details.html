@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Details - CampusFlow</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🍔 CampusFlow</h1>
+
+    <h2>Customer Details</h2>
+
+    <div class="menu-item">
+
+        <p>
+            Please enter your name before placing the order.
+        </p>
+
+        <form method="POST">
+
+            <p>
+                <input
+                    type="text"
+                    name="customer_name"
+                    placeholder="Enter your name"
+                    required
+                    style="
+                        padding: 12px;
+                        font-size: 16px;
+                        width: 80%;
+                        max-width: 350px;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                    "
+                >
+            </p>
+
+            <br>
+
+            <button type="submit">
+                ✅ Continue to Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <a href="{{ url_for('cart') }}">
+        <button>
+            🛒 Back to Cart
+        </button>
+    </a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Cart - CampusFlow</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🛒 CampusFlow</h1>
+
+    <h2>Your Cart</h2>
+
+
+    {% if cart_items %}
+
+        {% for item in cart_items %}
+
+        <div class="menu-item">
+
+            <h3>{{ item["item"] }}</h3>
+
+            <p>
+                Price: ₹{{ item["price"] }}
+            </p>
+
+            <p>
+                Quantity: {{ item["quantity"] }}
+            </p>
+
+            <p>
+                Item Total: ₹{{ item["item_total"] }}
+            </p>
+
+
+            <a href="/add-to-cart/{{ item['item'] }}">
+                <button>➕</button>
+            </a>
+
+            <a href="/decrease/{{ item['item'] }}">
+                <button>➖</button>
+            </a>
+
+            <a href="/remove-from-cart/{{ item['item'] }}">
+                <button>🗑️ Remove</button>
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+
+        <div class="menu-item">
+
+            <h2>Total: ₹{{ total }}</h2>
+
+            <a href="/place-order">
+                <button>✅ Place Order</button>
+            </a>
+
+        </div>
+
+
+    {% else %}
+
+        <div class="menu-item">
+
+            <h3>Your cart is empty</h3>
+
+            <p>Add some food items to continue.</p>
+
+        </div>
+
+    {% endif %}
+
+
+    <br>
+
+    <a href="/menu">
+        <button>🍔 Back to Menu</button>
+    </a>
+
+</div>
+
+</body>
+</html>
+

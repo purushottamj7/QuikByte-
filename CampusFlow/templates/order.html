@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order Confirmed - CampusFlow</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container order-confirmation">
+
+    <!-- SUCCESS ICON -->
+
+    <div class="success-icon">
+        ✅
+    </div>
+
+    <h1>Order Confirmed!</h1>
+
+    <p class="success-message">
+        Your order has been placed successfully.
+    </p>
+
+
+    <!-- ORDER CARD -->
+
+    <div class="order-card">
+
+        <!-- ORDER ID -->
+
+        <div class="order-header">
+
+            <span>Order ID</span>
+
+            <strong>
+                #{{ order["id"] }}
+            </strong>
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- CUSTOMER -->
+
+        <div class="customer-section">
+
+            <h3>👤 Customer</h3>
+
+            <p>
+                {{ order["customer_name"] }}
+            </p>
+
+            <p class="consumer-id">
+                🆔 {{ order["consumer_id"] }}
+            </p>
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- ITEMS -->
+
+        <h3>🍽️ Your Order</h3>
+
+        <div class="order-items">
+
+            {% for item in items %}
+
+            <div class="order-item">
+
+                <span>
+                    {{ item["item"] }}
+                    × {{ item["quantity"] }}
+                </span>
+
+                <strong>
+                    ₹{{ item["price"] * item["quantity"] }}
+                </strong>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- TOTAL -->
+
+        <div class="order-total">
+
+            <span>
+                Total Amount
+            </span>
+
+            <strong>
+                ₹{{ order["total_price"] }}
+            </strong>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="status-box">
+
+            <h3>📦 Order Status</h3>
+
+            <p>
+                🟡 Order Placed
+            </p>
+
+        </div>
+
+
+        <!-- WAIT TIME -->
+
+        <div class="wait-box">
+
+            <h3>⏱️ Estimated Wait Time</h3>
+
+            {% if order["status"] == "Placed" %}
+
+                <p>
+                    Approximately <strong>15 minutes</strong>
+                </p>
+
+            {% elif order["status"] == "Preparing" %}
+
+                <p>
+                    Approximately <strong>10 minutes</strong>
+                </p>
+
+            {% elif order["status"] == "Ready" %}
+
+                <p>
+                    🎉 Your order is ready!
+                </p>
+
+            {% elif order["status"] == "Collected" %}
+
+                <p>
+                    ✅ Order completed
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="confirmation-buttons">
+
+        <a href="{{ url_for('track', order_id=order['id']) }}">
+
+            <button class="track-button">
+                📦 Track Order
+            </button>
+
+        </a>
+
+
+        <a href="{{ url_for('menu') }}">
+
+            <button>
+                🍔 Order More Food
+            </button>
+
+        </a>
+
+
+        <a href="{{ url_for('home') }}">
+
+            <button>
+                🏠 Home
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

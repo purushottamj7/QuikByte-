@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFlow</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🍔 CampusFlow</h1>
+
+    <h2>Smart Campus Canteen</h2>
+
+    <p>
+        Order food, track your order and view your order history.
+    </p>
+
+
+    <!-- ================================= -->
+    <!-- MAIN OPTIONS -->
+    <!-- ================================= -->
+
+    <div class="home-options">
+
+
+        <!-- VIEW MENU -->
+
+        <a href="{{ url_for('menu') }}"
+           class="home-card">
+
+            <div class="home-icon">
+                🍽️
+            </div>
+
+            <h3>
+                View Menu
+            </h3>
+
+            <p>
+                Browse food and prices
+            </p>
+
+        </a>
+
+
+        <!-- CART -->
+
+        <a href="{{ url_for('cart') }}"
+           class="home-card">
+
+            <div class="home-icon">
+                🛒
+            </div>
+
+            <h3>
+                My Cart
+            </h3>
+
+            <p>
+                View and place your order
+            </p>
+
+        </a>
+
+
+        <!-- TRACK ORDER -->
+
+        <a href="{{ url_for('search_order') }}"
+           class="home-card">
+
+            <div class="home-icon">
+                📦
+            </div>
+
+            <h3>
+                Track Order
+            </h3>
+
+            <p>
+                Check your order status
+            </p>
+
+        </a>
+
+
+        <!-- ORDER HISTORY -->
+
+        <a href="{{ url_for('order_history') }}"
+           class="home-card">
+
+            <div class="home-icon">
+                📋
+            </div>
+
+            <h3>
+                Order History
+            </h3>
+
+            <p>
+                View your previous orders
+            </p>
+
+        </a>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <p class="home-footer">
+        © CampusFlow | Smart Campus Canteen
+    </p>
+
+</div>
+
+</body>
+
+</html>

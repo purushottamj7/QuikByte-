@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Dashboard - CampusFlow</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="staff-dashboard">
+
+    <!-- TOP BAR -->
+
+    <div class="staff-topbar">
+
+        <div>
+            <h1>📦 CampusFlow</h1>
+            <p>Staff Management Dashboard</p>
+        </div>
+
+        <a href="{{ url_for('staff_logout') }}"
+           class="logout-button">
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- WELCOME -->
+
+    <div class="staff-welcome">
+
+        <h2>👋 Welcome, Staff</h2>
+
+        <p>
+            Manage customer orders and menu availability from one place.
+        </p>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="dashboard-stats">
+
+        <div class="dashboard-stat">
+            <div class="stat-icon">📦</div>
+            <div>
+                <h3>{{ total_orders }}</h3>
+                <p>Total Orders</p>
+            </div>
+        </div>
+
+
+        <div class="dashboard-stat">
+            <div class="stat-icon">🟡</div>
+            <div>
+                <h3>{{ placed_orders }}</h3>
+                <p>New Orders</p>
+            </div>
+        </div>
+
+
+        <div class="dashboard-stat">
+            <div class="stat-icon">🔵</div>
+            <div>
+                <h3>{{ preparing_orders }}</h3>
+                <p>Preparing</p>
+            </div>
+        </div>
+
+
+        <div class="dashboard-stat">
+            <div class="stat-icon">🟢</div>
+            <div>
+                <h3>{{ ready_orders }}</h3>
+                <p>Ready</p>
+            </div>
+        </div>
+
+
+        <div class="dashboard-stat">
+            <div class="stat-icon">✅</div>
+            <div>
+                <h3>{{ collected_orders }}</h3>
+                <p>Collected</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- MENU MANAGEMENT -->
+
+    <div class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>🍽️ Menu Management</h2>
+                <p>Control which items are currently available.</p>
+            </div>
+
+        </div>
+
+
+        <div class="menu-management">
+
+            {% for item in menu_items %}
+
+            <div class="menu-management-card">
+
+                <div>
+
+                    <h3>{{ item["item"] }}</h3>
+
+                    <p class="menu-price">
+                        ₹{{ item["price"] }}
+                    </p>
+
+                </div>
+
+
+                {% if item["available"] %}
+
+                    <span class="availability available">
+                        ● Available
+                    </span>
+
+                    <a href="{{ url_for(
+                        'toggle_availability',
+                        item_id=item['id']
+                    ) }}"
+                    class="availability-button unavailable-button">
+                        Make Unavailable
+                    </a>
+
+                {% else %}
+
+                    <span class="availability unavailable">
+                        ● Unavailable
+                    </span>
+
+                    <a href="{{ url_for(
+                        'toggle_availability',
+                        item_id=item['id']
+                    ) }}"
+                    class="availability-button available-button">
+                        Make Available
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ORDERS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>📋 Customer Orders</h2>
+                <p>View and manage recent customer orders.</p>
+            </div>
+
+        </div>
+
+
+        {% if orders %}
+
+        <div class="orders-container">
+
+            {% for data in orders %}
+
+            <div class="professional-order-card">
+
+
+                <!-- ORDER HEADER -->
+
+                <div class="order-card-header">
+
+                    <div>
+
+                        <h3>
+                            🧾 Order #{{ data["order"]["id"] }}
+                        </h3>
+
+                        <p>
+                            Consumer ID:
+                            <strong>
+                                {{ data["order"]["consumer_id"] }}
+                            </strong>
+                        </p>
+
+                    </div>
+
+
+                    {% if data["order"]["status"] == "Placed" %}
+
+                        <span class="status-badge status-placed">
+                            🟡 Placed
+                        </span>
+
+                    {% elif data["order"]["status"] == "Preparing" %}
+
+                        <span class="status-badge status-preparing">
+                            🔵 Preparing
+                        </span>
+
+                    {% elif data["order"]["status"] == "Ready" %}
+
+                        <span class="status-badge status-ready">
+                            🟢 Ready
+                        </span>
+
+                    {% elif data["order"]["status"] == "Collected" %}
+
+                        <span class="status-badge status-collected">
+                            ✅ Collected
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- CUSTOMER -->
+
+                <div class="customer-info">
+
+                    <p>
+                        👤
+                        <strong>Customer</strong>
+                        <br>
+                        {{ data["order"]["customer_name"] }}
+                    </p>
+
+                </div>
+
+
+                <!-- ITEMS -->
+
+                <div class="order-items">
+
+                    <h4>🍽️ Ordered Items</h4>
+
+                    {% for item in data["items"] %}
+
+                    <div class="order-item-row">
+
+                        <span>
+                            {{ item["item"] }}
+                            × {{ item["quantity"] }}
+                        </span>
+
+                        <strong>
+                            ₹{{ item["price"] * item["quantity"] }}
+                        </strong>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="order-total">
+
+                    <span>Total Amount</span>
+
+                    <strong>
+                        ₹{{ data["order"]["total_price"] }}
+                    </strong>
+
+                </div>
+
+
+                <!-- STATUS ACTIONS -->
+
+                <div class="order-actions">
+
+                    <p>Update Order Status</p>
+
+                    <div class="status-buttons">
+
+                        <a href="{{ url_for(
+                            'update_order',
+                            order_id=data['order']['id'],
+                            status='Preparing'
+                        ) }}">
+                            <button class="prepare-button">
+                                🔵 Preparing
+                            </button>
+                        </a>
+
+
+                        <a href="{{ url_for(
+                            'update_order',
+                            order_id=data['order']['id'],
+                            status='Ready'
+                        ) }}">
+                            <button class="ready-button">
+                                🟢 Ready
+                            </button>
+                        </a>
+
+
+                        <a href="{{ url_for(
+                            'update_order',
+                            order_id=data['order']['id'],
+                            status='Collected'
+                        ) }}">
+                            <button class="collected-button">
+                                ✅ Collected
+                            </button>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-orders">
+
+            <div>📭</div>
+
+            <h3>No Orders Yet</h3>
+
+            <p>
+                Customer orders will appear here when someone places an order.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="staff-footer">
+
+        <a href="{{ url_for('home') }}">
+            🏠 Back to CampusFlow Home
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

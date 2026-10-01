@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order History - CampusFlow</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📋 CampusFlow</h1>
+
+    <h2>Order History</h2>
+
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+        <div class="menu-item">
+
+            <h3>
+                📦 Order #{{ order["id"] }}
+            </h3>
+
+            <p>
+                💰 Total: ₹{{ order["total_price"] }}
+            </p>
+
+            <p>
+                📊 Status:
+                <strong>{{ order["status"] }}</strong>
+            </p>
+
+
+            {% if order["status"] == "Placed" %}
+
+                <p>🟡 Order Placed</p>
+
+            {% elif order["status"] == "Preparing" %}
+
+                <p>🔵 Preparing Your Order</p>
+
+            {% elif order["status"] == "Ready" %}
+
+                <p>🟢 Ready for Pickup</p>
+
+            {% elif order["status"] == "Collected" %}
+
+                <p>✅ Order Collected</p>
+
+            {% endif %}
+
+
+            <a href="{{ url_for('track', order_id=order['id']) }}">
+
+                <button>
+                    🔎 Track Order
+                </button>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="menu-item">
+
+            <h3>📭 No Orders Yet</h3>
+
+            <p>
+                Your previous orders will appear here.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    <br>
+
+    <a href="{{ url_for('menu') }}">
+        <button>
+            🍔 Back to Menu
+        </button>
+    </a>
+
+    <br><br>
+
+    <a href="/">
+        <button>
+            🏠 Home
+        </button>
+    </a>
+
+</div>
+
+</body>
+
+</html>

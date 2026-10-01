@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Track Order - CampusFlow</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📦 CampusFlow</h1>
+
+    <h2>Track Your Order</h2>
+
+    <div class="menu-item">
+
+        {% if error %}
+
+            <p style="color: red; font-weight: bold;">
+                ❌ {{ error }}
+            </p>
+
+        {% endif %}
+
+        <form method="POST">
+
+            <p>
+                Enter your Order ID
+            </p>
+
+            <input
+                type="number"
+                name="order_id"
+                placeholder="Example: 1"
+                required
+                style="
+                    padding: 12px;
+                    font-size: 16px;
+                    width: 80%;
+                    max-width: 300px;
+                    border: 1px solid #ccc;
+                    border-radius: 8px;
+                "
+            >
+
+            <br><br>
+
+            <button type="submit">
+                🔎 Track Order
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <a href="{{ url_for('menu') }}">
+        <button>
+            🍔 Back to Menu
+        </button>
+    </a>
+
+    <br><br>
+
+    <a href="/">
+        <button>
+            🏠 Home
+        </button>
+    </a>
+
+</div>
+
+</body>
+
+</html>
