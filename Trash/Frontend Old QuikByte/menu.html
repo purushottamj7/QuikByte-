@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Menu | Campus Canteen</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <header class="navbar">
+
+        <div class="logo">
+            Quik<span>Byte</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html" class="active">Menu</a>
+            <a href="cart.html">
+                Cart 🛒
+                <span id="cart-count">0</span>
+            </a>
+            <a href="login.html">Login</a>
+        </nav>
+
+    </header>
+
+
+    <section class="menu-header">
+
+        <p class="small-heading">
+            OUR MENU
+        </p>
+
+        <h1>
+            What are you craving?
+        </h1>
+
+        <p>
+            Choose your favourite food and add it to your cart.
+        </p>
+
+    </section>
+
+
+    <section class="menu-controls">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search for food..."
+            >
+
+            <span>🔍</span>
+
+        </div>
+
+
+        <div class="categories">
+
+            <button class="category-btn active" data-category="all">
+                All
+            </button>
+
+            <button class="category-btn" data-category="burger">
+                Burgers
+            </button>
+
+            <button class="category-btn" data-category="snack">
+                Snacks
+            </button>
+
+            <button class="category-btn" data-category="drink">
+                Drinks
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <main class="menu-container">
+
+        <div id="food-grid" class="food-grid">
+
+
+            <div class="food-card"
+                 data-name="Veg Burger"
+                 data-category="burger">
+
+                <div class="food-image">
+                    🍔
+                </div>
+
+                <div class="food-info">
+
+                    <span class="food-category">
+                        Burger
+                    </span>
+
+                    <h3>
+                        Veg Burger
+                    </h3>
+
+                    <p>
+                        Fresh vegetable burger with crispy patty.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹60
+                        </span>
+
+                        <button class="add-btn"
+                                onclick="addToCart('Veg Burger', 60)">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card"
+                 data-name="Cheese Burger"
+                 data-category="burger">
+
+                <div class="food-image">
+                    🍔
+                </div>
+
+                <div class="food-info">
+
+                    <span class="food-category">
+                        Burger
+                    </span>
+
+                    <h3>
+                        Cheese Burger
+                    </h3>
+
+                    <p>
+                        Classic burger topped with melted cheese.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹80
+                        </span>
+
+                        <button class="add-btn"
+                                onclick="addToCart('Cheese Burger', 80)">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card"
+                 data-name="French Fries"
+                 data-category="snack">
+
+                <div class="food-image">
+                    🍟
+                </div>
+
+                <div class="food-info">
+
+                    <span class="food-category">
+                        Snack
+                    </span>
+
+                    <h3>
+                        French Fries
+                    </h3>
+
+                    <p>
+                        Crispy golden fries with a pinch of salt.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹40
+                        </span>
+
+                        <button class="add-btn"
+                                onclick="addToCart('French Fries', 40)">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card"
+                 data-name="Veg Sandwich"
+                 data-category="snack">
+
+                <div class="food-image">
+                    🥪
+                </div>
+
+                <div class="food-info">
+
+                    <span class="food-category">
+                        Snack
+                    </span>
+
+                    <h3>
+                        Veg Sandwich
+                    </h3>
+
+                    <p>
+                        Grilled sandwich with fresh vegetables.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹50
+                        </span>
+
+                        <button class="add-btn"
+                                onclick="addToCart('Veg Sandwich', 50)">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card"
+                 data-name="Cold Coffee"
+                 data-category="drink">
+
+                <div class="food-image">
+                    ☕
+                </div>
+
+                <div class="food-info">
+
+                    <span class="food-category">
+                        Drink
+                    </span>
+
+                    <h3>
+                        Cold Coffee
+                    </h3>
+
+                    <p>
+                        Chilled creamy coffee for a refreshing break.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹50
+                        </span>
+
+                        <button class="add-btn"
+                                onclick="addToCart('Cold Coffee', 50)">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card"
+                 data-name="Lemonade"
+                 data-category="drink">
+
+                <div class="food-image">
+                    🥤
+                </div>
+
+                <div class="food-info">
+
+                    <span class="food-category">
+                        Drink
+                    </span>
+
+                    <h3>
+                        Lemonade
+                    </h3>
+
+                    <p>
+                        Fresh and chilled lemonade.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">
+                            ₹30
+                        </span>
+
+                        <button class="add-btn"
+                                onclick="addToCart('Lemonade', 30)">
+                            Add +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="no-results" class="no-results">
+
+            <h3>
+                No food found 😕
+            </h3>
+
+            <p>
+                Try searching for something else.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 QuikByte | College Mini Project
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
